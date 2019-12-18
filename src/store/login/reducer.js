@@ -1,6 +1,6 @@
 const initialState = {
   accessToken: null,
-  profile: { user_name: "" }
+  user_name: ""
 };
 
 export default function authReducer(state = initialState, action) {
@@ -8,10 +8,10 @@ export default function authReducer(state = initialState, action) {
 
   switch (action.type) {
     case "auth/USER_LOGGED_IN": {
-      return { accessToken: state.accessToken, profile: action.payload };
-    }
-    case "auth/SAVE_ACCESS_TOKEN": {
-      return { accessToken: action.payload, profile: state.profile };
+      return {
+        accessToken: action.payload.jwt,
+        user_name: action.payload.user_name
+      };
     }
     default: {
       return state;

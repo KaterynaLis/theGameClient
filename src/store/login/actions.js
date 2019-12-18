@@ -11,7 +11,7 @@ export function login(user_name, password) {
     })
       .then(data => {
         console.log("data", data);
-        const action = saveAccessToken(data.jwt);
+        const action = userLoggedIn(data);
         dispatch(action);
       })
 
@@ -19,22 +19,25 @@ export function login(user_name, password) {
   };
 }
 
-export function saveAccessToken(accessToken) {
+export function userLoggedIn({ jwt, user_name }) {
   return {
-    type: "auth/SAVE_ACCESS_TOKEN",
-    payload: accessToken
+    type: "auth/USER_LOGGED_IN",
+    payload: { jwt, user_name }
   };
 }
 
-export function userInfo(profile) {
-  return {
-    type: "USER_PROFILE",
-    payload: profile
+export function signUp(name, password) {
+  return function thunk(dispatch, getState) {
+    api("/users", {
+      method: "POST",
+      body: {
+        user_name: name,
+        password: password
+      }
+    })
+      .then(data => {
+        console.log("data", data);
+      })
+      .catch(err => console.log("err", err));
   };
 }
-// export function userLoggedIn(token) {
-//   return {
-//     type: "auth/USER_LOGGED_IN",
-//     payload: { token: token }
-//   };
-// }

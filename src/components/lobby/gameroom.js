@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import superagent from "superagent";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class GameRoom extends Component {
   url = "http://localhost:4000";
@@ -41,6 +43,10 @@ class GameRoom extends Component {
   };
 
   render() {
+    if (this.props.jwt === null) {
+      return <Link to="/login">Please sign up to share your rants</Link>;
+    }
+
     return (
       <form onSubmit={this.onSubmit}>
         <input type="text" onChange={this.onChange} value={this.state.text} />
@@ -50,4 +56,10 @@ class GameRoom extends Component {
   }
 }
 
-export default GameRoom;
+const mapStateToProps = reduxState => {
+  return {
+    jwt: reduxState.auth.jwt
+  };
+};
+
+export default connect(mapStateToProps)(GameRoom);

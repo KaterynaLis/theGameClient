@@ -13,7 +13,6 @@ function App() {
         <Link to="/login">LogIn</Link>
         <Link to="/lobby">Lobby</Link>
       </nav>
-
       <Route path="/signup" component={signUp} />
       <Route path="/login" component={LoginPage} />
       <Route path="/lobby" component={GameRoom} />

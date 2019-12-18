@@ -9,6 +9,13 @@ class LoginPage extends React.Component {
     password: ""
   };
 
+  componentDidUpdate() {
+    console.log(this.props.auth);
+    if (this.props.auth.accessToken) {
+      this.props.history.push("/lobby");
+    }
+  }
+
   handleSubmit = event => {
     event.preventDefault();
 
@@ -56,4 +63,10 @@ class LoginPage extends React.Component {
   }
 }
 
-export default connect()(LoginPage);
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  };
+}
+
+export default connect(mapStateToProps)(LoginPage);
