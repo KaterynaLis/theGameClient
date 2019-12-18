@@ -24,6 +24,10 @@ class LoginPage extends React.Component {
 
     const action = login(user_name, password);
     this.props.dispatch(action);
+    // this.setState({
+    //   user_name: "",
+    //   password: ""
+    // });
   };
 
   handleChange = event => {
@@ -35,7 +39,8 @@ class LoginPage extends React.Component {
   render() {
     return (
       <div>
-        <h1>Login</h1>
+        <h1>Welcome to the game</h1>
+        <h2>Please login first</h2>
         <form onSubmit={this.handleSubmit}>
           <p>
             <input

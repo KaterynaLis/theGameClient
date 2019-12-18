@@ -52,6 +52,9 @@ class GameRoom extends Component {
     } catch (error) {
       console.warn("error test:", error);
     }
+    this.setState({
+      text: ""
+    });
   };
 
   onChange = event => {
@@ -75,7 +78,7 @@ class GameRoom extends Component {
 
   render() {
     if (this.props.jwt === null) {
-      return <Link to="/login">Please login to access the lobby </Link>;
+      return <Link to="/">Please login to access the lobby </Link>;
     }
 
     const { gamerooms } = this.state;

@@ -33,7 +33,7 @@ class SignUp extends Component {
 
     this.props.dispatch(action);
 
-    this.props.history.push("/login");
+    this.props.history.push("/");
   };
 
   render() {
