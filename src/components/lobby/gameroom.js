@@ -75,15 +75,17 @@ class GameRoom extends Component {
 
   render() {
     if (this.props.jwt === null) {
-      return <Link to="/login">Please sign up to access the lobby </Link>;
+      return <Link to="/login">Please login to access the lobby </Link>;
     }
 
     const { gamerooms } = this.state;
 
     const list = gamerooms.map(gameroom => (
       <div key={gameroom.id}>
-        {gameroom.name}
-        <button onClick={() => this.onClick(gameroom.id)}>Join</button>
+        <Link to="/room" onClick={() => this.onClick(gameroom.id)}>
+          {gameroom.name}{" "}
+        </Link>
+        {/* <button onClick={() => this.onClick(gameroom.id)}>Join</button> */}
       </div>
     ));
 
@@ -99,7 +101,7 @@ class GameRoom extends Component {
 }
 
 const mapStateToProps = reduxState => {
-  console.log("is jwt here?", reduxState.auth.jwt);
+  console.log("is jwt here?", reduxState.auth);
   return {
     jwt: reduxState.auth.jwt
   };

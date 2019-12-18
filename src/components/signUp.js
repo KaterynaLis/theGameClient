@@ -8,6 +8,13 @@ class SignUp extends Component {
     password: ""
   };
 
+  // componentDidUpdate() {
+  //   console.log(this.props.auth);
+  //   if (this.state.user_name && this.state.password) {
+  //     this.props.history.push("/login");
+  //   }
+  // }
+
   handleChange = event => {
     const nameOfImputField = event.target.name;
     const valueOfImputField = event.target.value;
@@ -25,6 +32,8 @@ class SignUp extends Component {
     const action = signUp(user_name, password);
 
     this.props.dispatch(action);
+
+    this.props.history.push("/login");
   };
 
   render() {

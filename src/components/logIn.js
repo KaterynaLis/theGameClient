@@ -2,6 +2,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { login } from "../store/login/actions";
+import { Link } from "react-router-dom";
 
 class LoginPage extends React.Component {
   state = {
@@ -58,6 +59,10 @@ class LoginPage extends React.Component {
             <button type="submit">Login</button>
           </p>
         </form>
+        <div>
+          {" "}
+          If you don't have an acount, please <Link to="/signup">Sign up</Link>
+        </div>
       </div>
     );
   }
