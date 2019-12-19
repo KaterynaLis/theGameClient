@@ -4,7 +4,7 @@ class Room extends Component {
   render() {
     return (
       <div>
-        <button>join this room</button>
+        <p>Welcome into the game</p>
       </div>
     );
   }

@@ -11,7 +11,7 @@ class LoginPage extends React.Component {
   };
 
   componentDidUpdate() {
-    console.log(this.props.auth);
+    // console.log(this.props.auth);
     if (this.props.auth.accessToken) {
       this.props.history.push("/lobby");
     }

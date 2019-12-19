@@ -1,51 +1,39 @@
 import React, { Component } from "react";
-import superagent from "superagent";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import api from "../../api";
 
 class GameRoom extends Component {
   url = "http://localhost:4000";
 
-  stream = new EventSource(`${this.url}/stream`);
+  // stream = new EventSource(`${this.url}/stream`);
+
+  // state = {
+  //   text: ""
+  // };
+
+  // componentDidMount() {
+  //   this.stream.onmessage = event => {
+  //     const { data } = event;
+  //     const action = JSON.parse(data);
+  //     console.log("action", action);
+
+  //     this.props.dispatch(action);
+  //   };
+  // }
 
   state = {
-    text: "",
-    gamerooms: []
+    text: ""
   };
-
-  componentDidMount() {
-    this.stream.onmessage = event => {
-      const { data } = event;
-      const action = JSON.parse(data);
-      console.log("action", action);
-
-      const { type, payload } = action;
-
-      switch (type) {
-        case "ALL_GAMEROOMS": {
-          return this.setState({
-            gamerooms: payload
-          });
-        }
-        case "NEW_GAMEROOM": {
-          const gamerooms = [...this.state.gamerooms, payload];
-
-          return this.setState({
-            gamerooms
-          });
-        }
-        default:
-          console.log("Ignore:", type);
-      }
-    };
-  }
 
   onSubmit = async event => {
     event.preventDefault();
 
     try {
-      const response = await superagent.post(`${this.url}/gameroom`).send({
-        name: this.state.text
+      const response = await api("/gameroom", {
+        method: "POST",
+        body: { name: this.state.text },
+        jwt: this.props.jwt
       });
 
       console.log("response test:", response);
@@ -66,10 +54,14 @@ class GameRoom extends Component {
   onClick = async gameroomId => {
     console.log("gameroomId test:", gameroomId);
     try {
-      const response = await superagent.put(`${this.url}/join`).send({
-        gameroomId,
-        userId: 1
+      const response = await api("/join", {
+        method: "PUT",
+        body: {
+          gameroomId
+        },
+        jwt: this.props.jwt
       });
+
       console.log("response test:", response);
     } catch (error) {
       console.log(error);
@@ -81,9 +73,9 @@ class GameRoom extends Component {
       return <Link to="/">Please login to access the lobby </Link>;
     }
 
-    const { gamerooms } = this.state;
+    const { rooms } = this.props;
 
-    const list = gamerooms.map(gameroom => (
+    const list = rooms.map(gameroom => (
       <div key={gameroom.id}>
         <Link to="/room" onClick={() => this.onClick(gameroom.id)}>
           {gameroom.name}{" "}
@@ -106,7 +98,8 @@ class GameRoom extends Component {
 const mapStateToProps = reduxState => {
   console.log("is jwt here?", reduxState.auth);
   return {
-    jwt: reduxState.auth.jwt
+    jwt: reduxState.auth.accessToken,
+    rooms: reduxState.rooms
   };
 };
 
