@@ -6,22 +6,6 @@ import api from "../../api";
 class GameRoom extends Component {
   url = "http://localhost:4000";
 
-  // stream = new EventSource(`${this.url}/stream`);
-
-  // state = {
-  //   text: ""
-  // };
-
-  // componentDidMount() {
-  //   this.stream.onmessage = event => {
-  //     const { data } = event;
-  //     const action = JSON.parse(data);
-  //     console.log("action", action);
-
-  //     this.props.dispatch(action);
-  //   };
-  // }
-
   state = {
     text: ""
   };
@@ -80,7 +64,6 @@ class GameRoom extends Component {
         <Link to="/room" onClick={() => this.onClick(gameroom.id)}>
           {gameroom.name}{" "}
         </Link>
-        {/* <button onClick={() => this.onClick(gameroom.id)}>Join</button> */}
       </div>
     ));
 

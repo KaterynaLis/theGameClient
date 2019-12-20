@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import signUp from "./components/signUp";
-import { Route, Link } from "react-router-dom";
+import { Route } from "react-router-dom";
 import LoginPage from "./components/logIn";
 import GameRoom from "./components/lobby/gameroom";
 import Room from "./components/lobby/room";

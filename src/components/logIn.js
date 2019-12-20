@@ -11,7 +11,6 @@ class LoginPage extends React.Component {
   };
 
   componentDidUpdate() {
-    // console.log(this.props.auth);
     if (this.props.auth.accessToken) {
       this.props.history.push("/lobby");
     }
@@ -24,10 +23,6 @@ class LoginPage extends React.Component {
 
     const action = login(user_name, password);
     this.props.dispatch(action);
-    // this.setState({
-    //   user_name: "",
-    //   password: ""
-    // });
   };
 
   handleChange = event => {
