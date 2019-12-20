@@ -52,7 +52,7 @@ class GameRoom extends Component {
   };
 
   onClick = async gameroomId => {
-    console.log("gameroomId test:", gameroomId);
+    console.log("gameroomId:", gameroomId);
     try {
       const response = await api("/join", {
         method: "PUT",
